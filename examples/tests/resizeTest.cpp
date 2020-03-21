@@ -7,6 +7,7 @@
 #include <openpose/flags.hpp>
 // OpenPose dependencies
 #include <openpose/headers.hpp>
+#include <opencv2/imgcodecs.hpp>
 
 #ifdef USE_CUDA
     #ifdef USE_CAFFE
@@ -79,7 +80,7 @@
         try
         {
             // logging_level
-            op::Matrix opImg = op::loadImage(FLAGS_image_path, CV_LOAD_IMAGE_GRAYSCALE);
+            op::Matrix opImg = op::loadImage(FLAGS_image_path, cv::ImreadModes::IMREAD_GRAYSCALE);
             cv::Mat img = OP_OP2CVMAT(opImg);
             if(img.empty())
                 op::error("Could not open or find the image: " + FLAGS_image_path, __LINE__, __FUNCTION__, __FILE__);
